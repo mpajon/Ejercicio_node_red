@@ -1,0 +1,166 @@
+[
+    {
+        "id": "664aa726510b4fde",
+        "type": "tab",
+        "label": "Estación espacial internacional",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7969e7f53683abdf",
+        "type": "debug",
+        "z": "664aa726510b4fde",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "060a72676e03f9d3",
+        "type": "inject",
+        "z": "664aa726510b4fde",
+        "name": "Trigger every 5-secs",
+        "props": [
+            {
+                "p": "headers",
+                "v": "{\"Accept\":\"text/json\"}",
+                "vt": "json"
+            },
+            {
+                "p": "url",
+                "v": "http://api.open-notify.org/iss-now.json",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "3b88474842c4750d"
+            ]
+        ]
+    },
+    {
+        "id": "3b88474842c4750d",
+        "type": "http request",
+        "z": "664aa726510b4fde",
+        "name": "Get ISS coordinates",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 420,
+        "y": 140,
+        "wires": [
+            [
+                "6b32ca2b8bafb6cf"
+            ]
+        ]
+    },
+    {
+        "id": "6b32ca2b8bafb6cf",
+        "type": "function",
+        "z": "664aa726510b4fde",
+        "name": "Extract lat, lon",
+        "func": "let out = [];  // Declare an array\n\nlet id  = \"ISS\";\nlet lat = \"\";\nlet lon = \"\";\n\nlon = msg.payload.iss_position.longitude;\nlat = msg.payload.iss_position.latitude;\n\nout.push({\"name\": id, \"lat\": lat, \"lon\": lon, \"layer\": \"ISS position\", \"icon\": \"iss\"});\n\nmsg.payload = out;\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 140,
+        "wires": [
+            [
+                "605c9ce313e4a5a7",
+                "7969e7f53683abdf"
+            ]
+        ]
+    },
+    {
+        "id": "3f21049e64878fd8",
+        "type": "comment",
+        "z": "664aa726510b4fde",
+        "name": "Información",
+        "info": "Paquetes necesarios:\nnode-red-dashboard\nnode-red-contrib-web-worldmap",
+        "x": 110,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "605c9ce313e4a5a7",
+        "type": "ui_worldmap",
+        "z": "664aa726510b4fde",
+        "group": "2976f0b10d880a55",
+        "order": 1,
+        "width": "12",
+        "height": "10",
+        "name": "ISS",
+        "lat": "51",
+        "lon": "0",
+        "zoom": "4",
+        "layer": "EsriS",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "true",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "CO,RA,DN",
+        "maplist": "EsriS,EsriT,NatGeo",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 850,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "2976f0b10d880a55",
+        "type": "ui_group",
+        "name": "World_Map",
+        "tab": "906026b74a1ed967",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "906026b74a1ed967",
+        "type": "ui_tab",
+        "name": "ISS",
+        "icon": "dashboard",
+        "order": 41,
+        "disabled": false,
+        "hidden": false
+    }
+]

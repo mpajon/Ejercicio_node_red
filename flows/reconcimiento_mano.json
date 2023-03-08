@@ -1,0 +1,18 @@
+[
+    {
+        "id": "3fceeaa79cfebbcd",
+        "type": "image",
+        "z": "edf3d909175b019d",
+        "name": "",
+        "width": 160,
+        "data": "annotatedInput",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 640,
+        "y": 260,
+        "wires": []
+    }
+]

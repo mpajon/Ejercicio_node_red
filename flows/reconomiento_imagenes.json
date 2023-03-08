@@ -1,0 +1,86 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Reconocmiento de imágenes",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d7564bcda1641720",
+        "type": "cocossd",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "08c79cd35783f2a5",
+                "19d897cdc81384d3"
+            ]
+        ]
+    },
+    {
+        "id": "5fe1ef4bc8071f04",
+        "type": "fileinject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "d7564bcda1641720",
+                "8348ab4d8c41db43"
+            ]
+        ]
+    },
+    {
+        "id": "08c79cd35783f2a5",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "Salida",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "8348ab4d8c41db43",
+        "type": "image",
+        "z": "f6f2187d.f17ca8",
+        "name": "Foto Original",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 330,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "19d897cdc81384d3",
+        "type": "image",
+        "z": "f6f2187d.f17ca8",
+        "name": "Identificación de Imagen",
+        "width": 160,
+        "data": "annotatedInput",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 630,
+        "y": 180,
+        "wires": []
+    }
+]
